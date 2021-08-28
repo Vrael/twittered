@@ -324,6 +324,25 @@ public class ITwitterClientV2Test {
   }
 
   @Test
+  public void testCompareTwoStreamRulesCollection() {
+    List<StreamRule> colA = new ArrayList<>();
+    List<StreamRule> colB = new ArrayList<>();
+    assertEquals(colA, colB, "Collection are different and they must be equal");
+
+    colA.add(StreamRule.builder().value("test_rule").build());
+    assertNotEquals(colA, colB, "Collection are equal and they must be different");
+
+    colB.add(StreamRule.builder().value("test_rule").build());
+    assertEquals(colA, colB, "Collection are different and they must be equal");
+
+    colB.add(StreamRule.builder().value("test_rule_2").id("ID2").build());
+    assertNotEquals(colA, colB, "Collection are equal and they must be different");
+
+    colA.add(StreamRule.builder().value("test_rule_2").build());
+    assertEquals(colA, colB, "Collection are different and they must be equal");
+  }
+
+  @Test
   public void testStartStream() throws InterruptedException, ExecutionException {
     Future<Response> future = twitterClient.startFilteredStream(System.out::println);
     try {

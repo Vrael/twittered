@@ -30,6 +30,22 @@ public class StreamRules {
     public static class StreamRuleBuilder {
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      StreamRule that = (StreamRule) o;
+
+      return value.equals(that.value);
+    }
+
+    @Override
+    public int hashCode() {
+      return value.hashCode();
+    }
+
   }
 
   @lombok.Value
